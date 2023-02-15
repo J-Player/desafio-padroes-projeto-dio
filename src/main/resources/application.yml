@@ -1,0 +1,11 @@
+spring:
+  r2dbc:
+    url: r2dbc:postgres://localhost:5432/db
+    username: postgres
+    password: postgres
+springdoc:
+  webjars:
+    prefix: ""
+server:
+  error:
+    include-stacktrace: on_param
