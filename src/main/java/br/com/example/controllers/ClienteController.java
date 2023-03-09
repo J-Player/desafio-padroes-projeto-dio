@@ -51,8 +51,8 @@ public class ClienteController {
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @Operation(summary = "Exclui um cliente do banco")
-    public Mono<Void> deletar(@PathVariable Long id) {
-        return clienteService.deletar(id);
+    public Mono<Void> excluir(@PathVariable Long id) {
+        return clienteService.excluir(id);
     }
 
 }
