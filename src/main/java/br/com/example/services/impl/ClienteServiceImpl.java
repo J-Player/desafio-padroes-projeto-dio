@@ -56,8 +56,8 @@ public class ClienteServiceImpl implements ClienteService {
     }
 
     @Override
-    public Mono<Void> deletar(Long id) {
-        return clienteRepository.deleteById(id);
+    public Mono<Void> excluir(Long id) {
+        return buscarPorId(id).flatMap(clienteRepository::delete);
     }
 
     private <T> Mono<T> monoResponseStatusNotFoundException() {

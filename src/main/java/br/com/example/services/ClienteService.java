@@ -14,6 +14,6 @@ public interface ClienteService {
 
     Mono<Void> atualizar(Cliente cliente);
 
-    Mono<Void> deletar(Long id);
+    Mono<Void> excluir(Long id);
 
 }
