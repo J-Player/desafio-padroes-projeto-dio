@@ -4,10 +4,12 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.With;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Table;
 
 @Data
 @With
 @Builder
+@Table
 public class Cliente {
 
     @Id
