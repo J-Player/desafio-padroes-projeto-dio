@@ -47,12 +47,9 @@ public class ClienteServiceImpl implements ClienteService {
     @Transactional
     public Mono<Void> atualizar(Cliente cliente) {
         return buscarPorId(cliente.getId())
-                .then(viaCepService.consultarCep(cliente.getCep())
-                        .map(Endereco::getCep)
-                        .doOnError(error -> log.error("Error: {}", error.getMessage()))
-                        .map(cep -> cliente.withCep(cep.replaceAll("\\D", "")))
-                        .flatMap(clienteRepository::save)
-                        .then());
+                .thenReturn(cliente)
+                .flatMap(this::inserir)
+                .then();
     }
 
     @Override

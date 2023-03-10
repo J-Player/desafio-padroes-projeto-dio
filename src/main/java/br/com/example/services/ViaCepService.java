@@ -1,17 +1,24 @@
 package br.com.example.services;
 
 import br.com.example.domain.Endereco;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import reactivefeign.spring.config.ReactiveFeignClient;
+import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
 @Service
-@ReactiveFeignClient(name = "viacep", url = "https://viacep.com.br/ws")
-public interface ViaCepService {
+public class ViaCepService {
 
-    @GetMapping("/{cep}/json/")
-    Mono<Endereco> consultarCep(@PathVariable("cep") String cep);
+    @Autowired
+    @Qualifier(value = "viaCepClient")
+    private WebClient viaCepClient;
+
+    public Mono<Endereco> consultarCep(String cep) {
+        return viaCepClient.get()
+                .uri("/{cep}/json", cep)
+                .retrieve()
+                .bodyToMono(Endereco.class);
+    }
 
 }
